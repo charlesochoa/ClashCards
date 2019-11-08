@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             
+             mc:Ignorable="d"
+             x:Class="ClashCards.Views.ClashCardsDetailViewPage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Detail of the Card" TextColor="WhiteSmoke" FontSize="Small" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ff:CachedImage Source="{Binding State.Card.Avatar}" Margin="10 15 10 15" />
+            <Label Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="Large" FontAttributes="Bold" Text="{Binding State.Card.Name}"></Label>
+            <Label Grid.Row="1" Grid.ColumnSpan="3" Margin="0 5 2 10" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Micro" Text="{Binding State.Card.Description}"/>
+            <ListView x:Name="listPages"  Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="2" RowHeight="30"
+                      BackgroundColor="WhiteSmoke" ItemsSource="{Binding Cards}" SelectedItem="{Binding SelectedCard}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" >
+                                <ff:CachedImage Source="{Binding Avatar}" Margin="2 10 2 20"/>
+                                <Label Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Small" FontAttributes="Bold" Text="{Binding Name}">
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
+
