@@ -9,7 +9,7 @@
              xmlns:ViewModels="clr-namespace:ClashCards.ViewModels">
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal">
-            <Label Text="Clash Royale Cards" TextColor="WhiteSmoke" FontSize="Small" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Label Text="Clash Royale Cards" FontSize="Small" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
         </StackLayout>
     </NavigationPage.TitleView>
     <ContentPage.BindingContext>
@@ -27,14 +27,14 @@
                     <DataTemplate>
                         <Grid Padding="2">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="20" />
+                                <RowDefinition Height="70" />
                                 <RowDefinition Height="20" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <ff:CachedImage Grid.RowSpan="2" Source="{Binding Avatar}" WidthRequest="40" />
+                            <ff:CachedImage Grid.RowSpan="2" Source="{Binding Avatar}" Margin="5"/>
                             <Label Grid.Column="1" Grid.RowSpan="2" Text="{Binding Name}" FontSize="Micro" FontAttributes="Bold" LineBreakMode="CharacterWrap" VerticalOptions="CenterAndExpand" />
                         </Grid>
                     </DataTemplate>

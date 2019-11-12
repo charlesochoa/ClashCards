@@ -26,6 +26,8 @@ namespace ClashCards.ViewModels
         private CardsModel selectedCard;
         private StateModel state;
         public event PropertyChangedEventHandler PropertyChanged;
+        public bool IsEmpty { get { return Cards.Count <= 0; } }
+        public bool IsNotEmpty { get { return !IsEmpty; } }
 
         private ObservableCollection<CardsModel> cards;
 
@@ -60,32 +62,35 @@ namespace ClashCards.ViewModels
             get { return selectedCard; }
             set
             {
-                if (selectedCard != value)
-                {
-                    selectedCard = value;
-                    var args = new PropertyChangedEventArgs(nameof(SelectedCard));
-                    PropertyChanged?.Invoke(this, args);
-                    GetNextView();
-                }
+                selectedCard = value;
+                var args = new PropertyChangedEventArgs(nameof(SelectedCard));
+                PropertyChanged?.Invoke(this, args);
+                GetNextView();
             }
         }
 
 
         public void GetNextView()
         {
-            Console.WriteLine("Trying to load next detail page");
-            Console.WriteLine(SelectedCard.IdName);
-            var newState = new StateModel
+            if (SelectedCard != null)
             {
-                AlreadySeen = new List<string>(State.AlreadySeen),
-                Card = SelectedCard,
-            };
-            newState.AlreadySeen.Add(SelectedCard.IdName);
-            var detailPage = new ClashCardsDetailViewPage()
-            {
-                BindingContext = new ClashCardsDetailViewModel(newState)
-            };
-            Application.Current.MainPage.Navigation.PushAsync(detailPage);
+
+                Console.WriteLine("Trying to load next detail page");
+                Console.WriteLine(SelectedCard.IdName);
+                var newState = new StateModel
+                {
+                    AlreadySeen = new List<string>(State.AlreadySeen),
+                    Card = SelectedCard,
+                };
+                newState.AlreadySeen.Add(SelectedCard.IdName);
+                var detailPage = new ClashCardsDetailViewPage()
+                {
+                    BindingContext = new ClashCardsDetailViewModel(newState)
+                };
+                SelectedCard = null;
+                Application.Current.MainPage.Navigation.PushAsync(detailPage);
+            }
+
         }
 
     }
